@@ -1,1 +1,9 @@
-export {default as Button} from "./Button/Button";
+export { default as Button } from './button';
+export { default as Tooltip } from './tooltip';
+export { default as Modal } from './modal';
+export { default as Loader } from './loader';
+export { default as Notify } from './notification';
+export { default as Checkbox } from './checkbox';
+export { default as Select } from './select';
+export { default as RadioButton } from './radio-button';
+export { default as Input } from './input-text';

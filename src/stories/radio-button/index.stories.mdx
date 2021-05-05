@@ -1,0 +1,18 @@
+import { Meta, Preview, Story, Props } from "@storybook/addon-docs/blocks";
+import { css } from "styled-components";
+import { RadioButton } from "../../lib";
+
+<Meta title="Components/RadioButton" />
+
+<Preview>
+  <RadioButton
+    id={1}
+    onChange={() => {
+      console.log("este es un radio-button");
+    }}
+  />
+  <RadioButton id={2} disabled={true} />
+  <RadioButton id={3} error={true} />
+</Preview>
+
+<Props of={RadioButton} />

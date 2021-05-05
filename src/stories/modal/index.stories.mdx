@@ -1,0 +1,19 @@
+import { Meta, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Modal, Button } from "../../lib";
+import { DummyModalFull, DummyModalDefault, DummyModalTerms } from "./dummy.js";
+
+<Meta title="Components/Modal" />
+
+# Modales
+
+<Preview>
+  <div style={{ backgroundColor: "#FFFFFF", width: "100%", height: "100vh" }}>
+    <DummyModalDefault />
+    <DummyModalTerms />
+    <DummyModalFull />
+  </div>
+</Preview>
+
+# Props
+
+<Props of={Modal} />

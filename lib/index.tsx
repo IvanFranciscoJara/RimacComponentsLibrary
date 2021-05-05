@@ -1,9 +1,0 @@
-export { default as Button } from './Components/button';
-export { default as Tooltip } from './Components/tooltip';
-export { default as Modal } from './Components/modal';
-export { default as Loader } from './Components/loader';
-export { default as Notify } from './Components/notification';
-export { default as Checkbox } from './Components/checkbox';
-export { default as Select } from './Components/select';
-export { default as RadioButton } from './Components/radio-button';
-export { default as Input } from './Components/input-text';

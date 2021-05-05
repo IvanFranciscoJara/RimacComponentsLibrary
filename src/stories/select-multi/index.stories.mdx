@@ -1,0 +1,47 @@
+import { Meta, Preview, Story, Props } from "@storybook/addon-docs/blocks";
+import { SelectMulti } from "../../lib";
+import { optionsDropdown, optionSelect } from "./dummy.js";
+
+<Meta title="Components/SelectMulti" />
+
+# Select
+
+<Preview>
+  <Select placeholder="select" width="280px" options={optionsDropdown} />
+</Preview>
+
+# Select Active
+
+<Preview>
+  <Select
+    placeholder="select"
+    width="280px"
+    options={optionsDropdown}
+    selectedItem={optionSelect}
+  />
+</Preview>
+
+# Select disabled
+
+<Preview>
+  <Select
+    placeholder="select"
+    width="280px"
+    options={optionsDropdown}
+    disabled
+  />
+</Preview>
+
+# Select disabled active
+
+<Preview>
+  <Select
+    placeholder="select"
+    width="280px"
+    options={optionsDropdown}
+    selectedItem={optionSelect}
+    disabled
+  />
+</Preview>
+
+<Props of={Select} />

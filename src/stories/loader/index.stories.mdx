@@ -1,0 +1,58 @@
+import { Meta, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Loader } from "../../lib";
+
+<Meta title="Components/Loader" />
+
+# Loader
+
+<Preview>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+    }}
+  >
+    <Loader background="#F0F2FA" color="#EF3340" size="36px" />
+    <Loader background="#F0F2FA" color="#EF3340" size="16px" />
+    <Loader background="#F0F2FA" color="#EF3340" size="12px" />
+  </div>
+</Preview>
+
+# Loader background red
+
+<Preview>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+      backgroundColor: "#EF3340",
+      padding: "12px",
+    }}
+  >
+    <Loader background="#FC606B" color="white" size="36px" />
+    <Loader background="#FC606B" color="white" size="16px" />
+    <Loader background="#FC606B" color="white" size="12px" />
+  </div>
+</Preview>
+
+# Loader download
+
+<Preview>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+    }}
+  >
+    <Loader background="#E4E8F7" color="#939DFF" size="36px" />
+    <Loader background="#E4E8F7" color="#939DFF" size="16px" />
+    <Loader background="#E4E8F7" color="#939DFF" size="12px" />
+  </div>
+</Preview>
+
+# Props
+
+<Props of={Loader} />

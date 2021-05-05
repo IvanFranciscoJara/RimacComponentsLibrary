@@ -1,17 +1,20 @@
 {
   "name": "@ivanfranciscojara/rimac-component-library",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "dependencies": {
     "styled-components": "^5.2.1"
   },
   "scripts": {
+    "dev": "webpack-dev-server --env.TIPO=local --progress --colors --host 0.0.0.0",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rm -rf dist",
-    "prepare-build": "npm run clean && NODE_ENV=production babel lib --out-dir dist --extensions \".ts,.tsx\" --ignore 'lib/**/*.test.js'",
+    "prepare-build": "npm run clean && NODE_ENV=production babel src/lib --out-dir dist --extensions \".ts,.tsx,.js\" --ignore 'lib/**/*.test.js'",
     "copy": "cp package.json dist/ && cp README.md dist/",
-    "build": "npm run prepare-build && npm run copy"
+    "build": "npm run prepare-build && npm run copy",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,10 +37,24 @@
   "main": "index.js",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-transform-typescript": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.10.4",
+    "@babel/core": "^7.12.16",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@types/styled-components": "^5.1.7",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "html-webpack-plugin": "^4.0.0-beta.11",
+    "sass-loader": "^8.0.2",
+    "@storybook/addon-actions": "^6.1.17",
+    "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-links": "^6.1.17",
+    "@storybook/node-logger": "^6.1.17",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.17",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -45,10 +62,17 @@
     "@types/node": "^12.12.50",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
+    "babel-preset-minify": "^0.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "styled-components-ts": "^0.0.15",
+    "styled-tools": "^1.7.2",
+    "ts-loader": "^8.0.17",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "directories": {
@@ -56,12 +80,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RichardBray/simple-react-comp-library.git"
+    "url": "git+https://github.com/IvanFranciscoJara/RimacComponentsLibrary.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RichardBray/simple-react-comp-library/issues"
+    "url": "https://github.com/IvanFranciscoJara/RimacComponentsLibrary/issues"
   },
-  "homepage": "https://github.com/RichardBray/simple-react-comp-library#readme"
+  "homepage": "https://github.com/IvanFranciscoJara/RimacComponentsLibrary#readme"
 }

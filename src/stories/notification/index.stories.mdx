@@ -1,0 +1,40 @@
+import { Meta, Preview, Story, Props } from "@storybook/addon-docs/blocks";
+import { css } from "styled-components";
+import { Notify, Button } from "../../lib";
+
+<Meta title="Components/Notify" />
+
+<Preview>
+  <Story name="Success">
+    <Notify type="success">
+      <p>
+        <b>Listo!</b> Medio de pago cambiado correctamente.
+      </p>
+    </Notify>
+  </Story>
+</Preview>
+
+<Preview>
+  <Story name="Warning">
+    <Notify type="warning">
+      <p>
+        <b>¡Cuidado!</b> tienes tres seguros por caducar.
+      </p>{" "}
+      <Button size="small" type="secondary">
+        Renuévalos
+      </Button>
+    </Notify>
+  </Story>
+</Preview>
+
+<Preview>
+  <Story name="Danger">
+    <Notify type="danger">
+      <p>
+        <b>¡Sucedió algo!</b> Ha ocurrido un problema. Intente nuevamente.
+      </p>
+    </Notify>
+  </Story>
+</Preview>
+
+<Props of={Notify} />

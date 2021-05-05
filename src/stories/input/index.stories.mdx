@@ -1,0 +1,67 @@
+import { Meta, Preview, Story, Props } from "@storybook/addon-docs/blocks";
+import { Input } from "../../lib";
+import { ViewInput, EmailInput } from "./dummy.js";
+
+<Meta title="Components/Input" />
+
+# Input default
+
+<Preview>
+  <ViewInput />
+</Preview>
+
+# Input Filled
+
+<Preview>
+  <Input placeholder="label" width="280px" type="nombre" value="Input" />
+</Preview>
+
+# Input disabled
+
+<Preview>
+  <Input placeholder="label" width="280px" disabled />
+</Preview>
+
+# Input disabled filled
+
+<Preview>
+  <Input placeholder="label" width="280px" value="Input text" disabled />
+</Preview>
+
+# Input email
+
+<Preview>
+  <EmailInput />
+</Preview>
+
+<Props of={Input} />
+
+# Opciones de input
+
+- soloTexto:
+  - "nombreejecutivo"
+  - "nombrebroker"
+  - "nombre"
+  - "apepaterno"
+  - "apematerno"
+- "documento"
+  - "1" : RUC,
+  - "2" : DNI,
+- "celular"
+- "placa"
+- "correo"
+- alfanumerico:
+  - "direccion"
+  - "motor"
+  - "serie"
+  - "tipodocumento"
+  - "cobertura"
+  - "marca"
+  - "modelo"
+  - "distrito"
+  - 'razonsocial'
+  - 'resdepago'
+- anio
+- monto
+- soloNumero
+  - nrodir

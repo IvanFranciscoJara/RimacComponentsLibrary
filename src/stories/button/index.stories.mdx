@@ -1,0 +1,94 @@
+import { Meta, Preview, Props } from "@storybook/addon-docs/blocks";
+// import { Button } from '../../components';
+import { Button } from "../../lib";
+
+<Meta title="Components/Button" />
+
+# Primary
+
+<Preview>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+    }}
+  >
+    <Button size="small" type="primary">
+      BUTTON S
+    </Button>
+    <Button size="default" type="primary">
+      BUTTON M
+    </Button>
+    <Button size="large" type="primary">
+      BUTTON L
+    </Button>
+  </div>
+</Preview>
+
+# Secondary
+
+<Preview>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+    }}
+  >
+    <Button size="small" type="secondary">
+      BUTTON S
+    </Button>
+    <Button size="default" type="secondary">
+      BUTTON M
+    </Button>
+    <Button size="large" type="secondary">
+      BUTTON L
+    </Button>
+  </div>
+</Preview>
+
+# Disabled
+
+<Preview>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+    }}
+  >
+    <Button size="small" type="secondary" disabled>
+      BUTTON S
+    </Button>
+    <Button size="default" type="secondary" disabled>
+      BUTTON M
+    </Button>
+    <Button size="large" type="secondary" disabled>
+      BUTTON L
+    </Button>
+  </div>
+</Preview>
+
+# Link
+
+<Preview>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+    }}
+  >
+    <Button size="small" type="link">
+      BUTTON S
+    </Button>
+    <Button size="default" type="link">
+      BUTTON M
+    </Button>
+  </div>
+</Preview>
+
+# Props
+
+<Props of={Button} />

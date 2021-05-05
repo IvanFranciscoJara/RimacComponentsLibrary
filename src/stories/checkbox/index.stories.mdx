@@ -1,0 +1,20 @@
+import { Meta, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Checkbox } from "../../lib";
+
+<Meta title="Components/Checkbox" />
+
+# Checkbox
+
+<Preview>
+  <Checkbox
+    label={"Este es el checkbox"}
+    id="checkbox"
+    onChange={(prop) => {
+      console.log(prop);
+    }}
+  />
+</Preview>
+
+# Props
+
+<Props of={Checkbox} />

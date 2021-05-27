@@ -19,7 +19,7 @@ module.exports = (env) => {
     // devtool: false,
     // devtool: 'cheap-module-eval-source-map',
     devServer: {
-      port: 9630,
+      port: 9631,
       historyApiFallback: true,
       // contentBase: 'http://localhost:9000/',
       //  contentBase: './',

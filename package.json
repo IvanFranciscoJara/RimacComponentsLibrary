@@ -1,6 +1,6 @@
 {
   "name": "@ivanfranciscojara/rimac-component-library",
-  "version": "0.2.7",
+  "version": "0.2.10",
   "dependencies": {
     "styled-components": "^5.2.1"
   },
@@ -10,7 +10,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rm -rf dist",
-    "prepare-build": "npm run clean && NODE_ENV=production babel src/lib --out-dir dist --extensions \".ts,.tsx,.js\" --ignore 'lib/**/*.test.js'",
+    "prepare-build": "npm run clean && mkdir dist && SET NODE_ENV=production & babel src/lib --out-dir dist --extensions \".ts,.tsx,.js\" --ignore 'lib/**/*.test.js'",
     "copy": "cp package.json dist/ && cp README.md dist/",
     "build": "npm run prepare-build && npm run copy",
     "storybook": "start-storybook -p 6006 -s public",

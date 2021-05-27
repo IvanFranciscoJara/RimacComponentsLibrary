@@ -3,14 +3,13 @@ import {
   Options,
   ContainerOptions,
   ContainerInput,
-  SelectContainer,
   OptionSelected,
-  ConstantHeight,
+  SelectContainer,
 } from "./styled";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Icon } from "../icon";
 import { COLORS } from "../../utils/theme/constants";
-
+import Checkbox from "../checkbox";
 interface Props {
   placeholder?: string;
   width?: string;
@@ -18,15 +17,19 @@ interface Props {
   onChange?: (newSelectedOptions: { value: string; text: string }[]) => void;
   selectedOptions?: { value: string; text: string }[];
   disabled?: boolean;
+  limitTags?: number;
+}
+
+interface elemDelete {
+  value?: string;
+  text?: string;
 }
 
 export const Select: React.FC<Props> = (props) => {
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useState(false);
-  const [optionSelected] = useState<{
-    value: string;
-    text: string;
-  } | null>(null);
+  const [showAllOptions, setShowAllOptions] = useState(false);
+  const [selectAll, setSelectAll] = useState(false);
   const {
     placeholder,
     width,
@@ -34,8 +37,7 @@ export const Select: React.FC<Props> = (props) => {
     onChange,
     selectedOptions,
     disabled,
-    // onAddItem,
-    // onRemoveItem,
+    limitTags = 3,
   } = props;
 
   useEffect(() => {
@@ -43,6 +45,14 @@ export const Select: React.FC<Props> = (props) => {
     //   setOptionSelected(selectedItem);
     // }
   }, []);
+
+  useEffect(() => {
+    const validateAllSelected = () => {
+      if (selectedOptions?.length === options?.length) setSelectAll(true);
+      else setSelectAll(false);
+    };
+    validateAllSelected();
+  }, [selectedOptions]);
 
   const selectOption = (value: string, text: string) => {
     let newSelectedOptions = selectedOptions ? [...selectedOptions] : [];
@@ -60,13 +70,15 @@ export const Select: React.FC<Props> = (props) => {
   const escListener = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") {
       setShowOptions(false);
+      setShowAllOptions(false);
     }
   }, []);
 
   const clickOutListener = useCallback(
     (e: MouseEvent) => {
-      if (!(ref.current! as any).contains(e.target)) {
+      if (!(ref.current! as any)?.contains(e.target)) {
         setShowOptions(false);
+        setShowAllOptions(false);
       }
     },
     [ref.current]
@@ -84,99 +96,125 @@ export const Select: React.FC<Props> = (props) => {
   const handleClick = () => {
     if (!disabled) {
       setShowOptions(!showOptions);
+      setShowAllOptions(!showAllOptions);
     }
   };
 
-  return (
-    <div style={{ position: "relative" }}>
-      <ConstantHeight
-        onClick={handleClick}
-        active={showOptions}
-        fill={optionSelected}
-        disabled={disabled}
-      >
-        <div>
-          {options?.length === selectedOptions?.length ? (
-            <span>{placeholder}: TODOS</span>
-          ) : (
-            <>
-              <span>{placeholder}</span>
-              <OptionSelected>
-                {selectedOptions?.map((selectedOption) => (
-                  <div className="option">{selectedOption.text}</div>
-                ))}
-              </OptionSelected>
-            </>
-          )}
-        </div>
-        <Icon
-          name={showOptions ? "gl_arrow_up" : "gl_arrow_down"}
-          width="16px"
-          height="16px"
-          fill={disabled ? COLORS.GRAY_4 : COLORS.RED}
-        />
-      </ConstantHeight>
-      <SelectContainer width={width} active={showOptions} ref={ref}>
-        <ContainerInput
-          onClick={handleClick}
-          active={showOptions}
-          fill={optionSelected}
-          disabled={disabled}
-        >
-          <div style={{ width: "100%" }}>
-            {options?.length === selectedOptions?.length ? (
-              <span>{placeholder}: TODOS</span>
-            ) : (
-              <>
-                <span>{placeholder}</span>
-                <OptionSelected>
-                  {selectedOptions?.map((selectedOption) => (
-                    <div className="option">{selectedOption.text}</div>
-                  ))}
-                </OptionSelected>
-              </>
-            )}
-            {/* <span>{placeholder}</span>
-            <OptionSelected>
-              {selectedOptions?.map((selectedOption) => (
-                <div className="option">{selectedOption.text}</div>
-              ))}
-            </OptionSelected> */}
-          </div>
-          <Icon
-            name={showOptions ? "gl_arrow_up" : "gl_arrow_down"}
-            width="16px"
-            height="16px"
-            fill={disabled ? COLORS.GRAY_4 : COLORS.RED}
-          />
-        </ContainerInput>
-        <ContainerOptions showOptions={showOptions}>
-          {options &&
-            options.map((option) => {
-              let isSelected =
-                selectedOptions?.findIndex(
-                  (selectedOption) => selectedOption.value === option.value
-                ) !== -1;
-              return (
-                <Options
-                  key={option.value}
-                  onClick={() => selectOption(option.value, option.text)}
+  const removeElement = (elem: elemDelete) => {
+    let copyList = selectedOptions ? [...selectedOptions] : [];
+    copyList = copyList.filter(
+      (item) => item.value !== elem.value && item.text !== elem.text
+    );
+    onChange && onChange(copyList);
+  };
+
+  const handleSelectAll = (newState) => {
+    // let newState = !selectAll;
+    // console.log("handle multi after ", newState);
+    setSelectAll(newState);
+    if (newState) {
+      onChange && onChange(options ?? []);
+    } else {
+      onChange && onChange([]);
+    }
+  };
+
+  const renderSeleccion = () => (
+    <ContainerInput
+      onClick={handleClick}
+      active={showOptions}
+      fill={selectedOptions?.length}
+      disabled={disabled}
+    >
+      <div style={{ width: "100%" }}>
+        <p>{placeholder}</p>
+        {selectedOptions && selectedOptions.length > 0 && (
+          <OptionSelected>
+            {selectedOptions
+              ?.filter(
+                (_, i) =>
+                  i < (!showAllOptions ? limitTags : selectedOptions?.length)
+              )
+              .sort((a, b) =>
+                a.text < b.text ? -1 : a.text === b.text ? 0 : 1
+              )
+              .map((selectedOption, index) => (
+                <div
+                  className="option"
+                  key={index}
+                  onClick={() => removeElement(selectedOption)}
                 >
-                  {option.text}
-                  {isSelected && (
-                    <Icon
-                      name={"gl_check"}
-                      width="16"
-                      height="16px"
-                      fill={COLORS.GREEN}
-                    />
-                  )}
-                </Options>
-              );
-            })}
-        </ContainerOptions>
-      </SelectContainer>
-    </div>
+                  <h1>{selectedOption.text}</h1>
+                  <Icon
+                    name="gl_close"
+                    width="16px"
+                    height="16px"
+                    fill={COLORS.GRAY_2}
+                  />
+                </div>
+              ))}
+            {!showAllOptions &&
+              (selectedOptions ? selectedOptions.length - limitTags : 0) >
+                0 && (
+                <div
+                  className="option"
+                  key={0}
+                  onClick={() => setShowAllOptions(true)}
+                >
+                  <h1>
+                    + {selectedOptions ? selectedOptions.length - limitTags : 0}
+                  </h1>
+                </div>
+              )}
+          </OptionSelected>
+        )}
+      </div>
+      <Icon
+        name={showOptions ? "gl_arrow_up" : "gl_arrow_down"}
+        width="16px"
+        height="16px"
+        fill={disabled ? COLORS.GRAY_4 : COLORS.RED}
+      />
+    </ContainerInput>
+  );
+
+  const renderOptions = () => (
+    <ContainerOptions showOptions={showOptions}>
+      {options && (
+        <>
+          <Options
+            key="TodosOption"
+            onClick={() => handleSelectAll(!selectAll)}
+          >
+            <Checkbox checked={selectAll} />
+            <p>Seleccionar todos</p>
+          </Options>
+
+          {options.map((option) => {
+            let isSelected =
+              selectedOptions?.findIndex(
+                (selectedOption) => selectedOption.value === option.value
+              ) !== -1;
+            return (
+              <Options
+                key={option.value}
+                onClick={() => selectOption(option.value, option.text)}
+              >
+                <Checkbox checked={isSelected} />
+                <p>{option.text}</p>
+              </Options>
+            );
+          })}
+        </>
+      )}
+    </ContainerOptions>
+  );
+
+  return (
+    <SelectContainer width={width} active={showOptions} ref={ref}>
+      {renderSeleccion()}
+      {renderOptions()}
+    </SelectContainer>
   );
 };
 

@@ -1,0 +1,5 @@
+Para publicarlo:
+    1) cambiar la version en la package.json general.
+    2) npm run build
+    3) dirigirte a la carpeta dist que debe tener la carpeta de componentes, utils, index.js, package.json y README.md
+    4) npm publish

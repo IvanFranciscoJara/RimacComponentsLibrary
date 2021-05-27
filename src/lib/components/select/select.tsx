@@ -55,7 +55,7 @@ export const Select: React.FC<Props> = (props) => {
 
   const clickOutListener = useCallback(
     (e: MouseEvent) => {
-      if (!(ref.current! as any).contains(e.target)) {
+      if (!(ref.current! as any)?.contains(e.target)) {
         setShowOptions(false);
       }
     },

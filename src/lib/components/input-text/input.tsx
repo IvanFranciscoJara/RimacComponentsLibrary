@@ -71,7 +71,7 @@ export const Input: React.FC<Props> = ({
 
   const clickOutListener = useCallback(
     (e: MouseEvent) => {
-      if (!(ref.current! as any).contains(e.target)) {
+      if (!(ref.current! as any)?.contains(e.target)) {
         setActive(false);
         if (valueInput === "") {
           setFill(false);
